@@ -1,0 +1,21 @@
+name: Test Composite Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run composite action
+        id: hello
+        uses: ./hello-world-composite
+        with:
+          who-to-greet: 'Anusripriya'
+
+      - name: Show random number
+        run: echo "Random number: ${{ steps.hello.outputs.random-number }}"
